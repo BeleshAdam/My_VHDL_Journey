@@ -6,9 +6,12 @@ begin
 
     process is
     begin
+        -- process starts here
 
         report "Boo";
 
+        wait for 10 ns;
+        -- and loops back here
     end process;
 
 end architecture;
