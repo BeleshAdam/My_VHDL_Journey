@@ -2,7 +2,7 @@ entity SensitivityListTB is
 end entity;
 
 -- This experiment shows that:
--- How you would use "if, elsif, else" in VHDL
+-- Sensitivity lists and their similarities with wait on
 
 architecture sim of SensitivityListTB is
 
@@ -35,7 +35,8 @@ begin
     begin
 
         if countUp = countDown then
-            report " Process B: Jackpot!";
+            report "Process B: Jackpot!";
+        end if;
 
     end process;
 
