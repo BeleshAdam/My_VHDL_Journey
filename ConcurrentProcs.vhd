@@ -10,6 +10,8 @@ architecture sim of CuncorrentProcs is
 
     signal Uns : unsigned(5 downto 0) := (others => '0');
     signal Mull : unsigned(7 downto 0);
+    signal Mull2 : unsigned(7 downto 0);
+    signal Mull3 : unsigned(7 downto 0);
 
 begin
 
@@ -31,5 +33,14 @@ begin
         wait on Uns;
 
     end process;
+
+    process(Uns) is
+    begin
+
+        Mull2 <= Uns & "00";
+
+    end process;
+
+    Mull3 <= Uns & "00";
 
 end architecture;
