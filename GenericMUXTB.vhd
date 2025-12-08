@@ -7,20 +7,22 @@ end entity;
 
 architecture sim of GenericMUXTB is
 
-    signal S1 : unsigned(7 downto 0) := x"AA";
-    signal S2 : unsigned(7 downto 0) := x"BB";
-    signal S3 : unsigned(7 downto 0) := x"CC";
-    signal S4 : unsigned(7 downto 0) := x"DD";
+    constant DataWidth : integer := 8;
+
+    signal S1 : unsigned(DataWidth -1 downto 0) := x"AA";
+    signal S2 : unsigned(DataWidth -1 downto 0) := x"BB";
+    signal S3 : unsigned(DataWidth -1 downto 0) := x"CC";
+    signal S4 : unsigned(DataWidth -1 downto 0) := x"DD";
 
     signal Sel : unsigned(1 downto 0) := (others => '0');
 
-    signal Output : unsigned(7 downto 0);
+    signal Output : unsigned(DataWidth -1 downto 0);
 
 begin
 
     -- an instance of GenericMUXTB with architecture rtl
     i_Mux1 : entity work.GenericMUX(rtl)
-    generic map(DataWidth => 8);
+    generic map(DataWidth => DataWidth);
     port map(
         Sel => Sel,
         S1 => S1,
