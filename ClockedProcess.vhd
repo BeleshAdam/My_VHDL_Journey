@@ -7,14 +7,45 @@ end entity;
 
 architecture sim of ClockedProcess is
 
-    constant ClockFrequency : integer   := 100e6;
+    constant ClockFrequency : integer   := 100000000;
     constant ClockPeriod    : time      := 1000 ms / ClockFrequency;
 
-    singal clk : std_logic := '1';
+    signal clk : std_logic := '1';
+    signal nRst   : std_logic := '0';
+    signal Input  : std_logic := '0';
+    signal Output : std_logic;
+
+
 
 begin
 
+    i_FlipFlop  : entity work.FlipFlop(rlt)
+    port map
+        (
+        clk     => clk,
+        nRst    => nRst,
+        Input   => Input,
+        Output  => Output
+        );
+
     clk <= not clk after ClockPeriod/2;
 
+    --TB sequence
+    process is
+    begin
+        nRst <= '1';
+
+        wait for 20 ns;
+        Input <= '1';
+        wait for 22 ns;
+        Input <= '0';
+        wait for 6 ns;
+        Input <= '1';
+        wait for 20 ns;
+
+        nRst <= '0';
+
+        wait;
+    end process;
 
 end architecture;
